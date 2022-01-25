@@ -1,6 +1,7 @@
 from sqlalchemy import (BigInteger, Boolean, Column, DateTime, ForeignKey,
                         String, text)
 from sqlalchemy.orm import relationship
+from sqlalchemy_utils import EmailType, PhoneNumberType
 
 from .database import Base
 
@@ -12,8 +13,9 @@ class User(Base):
     given_name = Column("given_name", String, nullable=True)
     additional_name = Column("additional_name", String, nullable=True)
     family_name = Column("family_name", String, nullable=True)
-    phone_number = Column("phone_number", String, nullable=True, unique=True)
-    email = Column("email", String, nullable=True, unique=True)
+    phone_number = Column("phone_number", PhoneNumberType,
+                          nullable=True, unique=True)
+    email = Column("email", EmailType, nullable=True, unique=True)
     username = Column("username", String, nullable=False, unique=True)
     password_hash = Column("password_hash", String, nullable=True)
     last_login = Column("last_login", DateTime, nullable=True)
